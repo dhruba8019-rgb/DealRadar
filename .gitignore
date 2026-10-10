@@ -2,3 +2,6 @@
 .env.*
 !.env.example
 secrets.json
+
+# Local backups - never publish
+backup/
