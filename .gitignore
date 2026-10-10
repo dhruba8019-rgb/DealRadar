@@ -5,3 +5,6 @@ secrets.json
 
 # Local backups - never publish
 backup/
+
+# Local Cloudflare development files
+.wrangler/
