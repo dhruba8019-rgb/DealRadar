@@ -31,3 +31,11 @@ This is a frontend demo. Sample product prices and discounts are illustrative, n
 
 ## Security status and limitations
 This is a static frontend prototype, not a fully security-audited production service. It has no backend, accounts, payments, live marketplace API, or server-side validation to audit yet. The `_headers` file is applied when deployed on Cloudflare Pages or a host configured to serve these headers; opening the HTML directly from disk does not enforce HTTP response headers. Before production, run dependency and dynamic security testing, verify all outbound URLs, add server-side rate limiting and validation to any API, protect secrets in server-side environment variables, set up monitoring/backups, and publish privacy/terms/affiliate notices. No site can honestly be guaranteed “fully secure.”
+
+## Hybrid search data rules
+DealRadar keeps two data types separate in the interface:
+- **Product listings:** show a price or discount only when it comes from an authorized product feed/API; identify the marketplace and when the data was last checked. Until an approved feed is connected, catalogue entries remain explicitly labelled as sample/demo data.
+- **Live promotions:** show Cuelinks coupon/promotion details in their own section. A promotion is not a product listing and must not be presented as proof of a current product price, stock status, or product-specific discount.
+- **Future marketplace adapters:** each authorized product provider should be integrated server-side and normalized into a common product format, with source, currency, retrieval time, and product URL. Keep provider credentials in server-side secrets. If a provider is unavailable or returns no data, show a clear empty/unavailable state rather than inventing live results.
+- **Release rule:** test changes on `feature/hybrid-product-search`; do not merge to `main` until the changes are reviewed and explicitly approved.
+
